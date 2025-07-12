@@ -18,13 +18,9 @@
       background: linear-gradient(120deg, #1e1e2f, #2a2a40);
       color: #eee;
     }
+    .lock-screen, .slider, .popup { display: none; }
+    .lock-screen.active, .slider.active, .popup.show { display: flex; }
 
-    .lock-screen, .slider, .popup {
-      display: none;
-    }
-    .lock-screen.active, .slider.active, .popup.show {
-      display: flex;
-    }
     .lock-screen {
       flex-direction: column;
       justify-content: center;
@@ -33,7 +29,6 @@
       text-align: center;
       padding: 2rem;
       color: #ff69b4;
-      animation: fadeInScale 1s ease;
     }
     .lock-screen h2 {
       font-size: 2.5rem;
@@ -64,11 +59,7 @@
       font-size: 1rem;
       cursor: pointer;
     }
-    .error-msg {
-      color: red;
-      margin-top: 0.5rem;
-      display: none;
-    }
+    .error-msg { color: red; margin-top: 0.5rem; display: none; }
 
     h1 {
       font-family: 'Great Vibes', cursive;
@@ -84,7 +75,6 @@
       max-width: 600px;
       color: #cc3366;
     }
-
     .slider {
       flex-direction: column;
       align-items: center;
@@ -106,22 +96,6 @@
       display: flex;
       animation: fadeIn 1s ease;
     }
-    .section:last-child {
-      animation: bounceIn 1.2s ease;
-      background: linear-gradient(180deg, #ffe4e1, #ffecf2);
-      border-radius: 1rem;
-      padding: 2rem;
-      margin: 1rem;
-      box-shadow: 0 0 10px rgba(255,105,180,0.3);
-      flex-direction: column;
-    }
-    .section:last-child strong {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2rem;
-      color: #ff4081;
-      text-shadow: 1px 1px #fff;
-      animation: pulse 2s infinite;
-    }
 
     .reveal-btn {
       margin-top: 3rem;
@@ -135,47 +109,6 @@
       box-shadow: 0 0 10px #ff80ab;
     }
 
-    .envelope-container {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 200px;
-      height: 150px;
-      background: #ff8fab;
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-      z-index: 1001;
-      display: none;
-      cursor: pointer;
-      animation: fadeInScale 0.8s ease;
-    }
-    .envelope-flap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200px;
-      height: 75px;
-      background: #ff6f91;
-      transform-origin: top;
-      transition: transform 0.6s ease-in-out;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-      z-index: 2;
-    }
-    .envelope.open .envelope-flap {
-      transform: rotateX(180deg);
-    }
-    .envelope-text {
-      position: absolute;
-      top: 80px;
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.4rem;
-      z-index: 1;
-    }
     .popup {
       position: fixed;
       top: 50%;
@@ -185,7 +118,7 @@
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 0 20px #ff80ab;
-      font-family: 'Great Vibes', cursive;
+      font-family: 'Gloria Hallelujah', cursive;
       z-index: 1002;
       display: none;
       flex-direction: column;
@@ -193,16 +126,16 @@
     }
 
     .letter-text {
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.6rem;
-      line-height: 2.2rem;
+      font-family: 'Gloria Hallelujah', cursive;
+      font-size: 1.2rem;
+      line-height: 2rem;
       white-space: pre-wrap;
-      border-right: 2px solid #ff69b4;
       overflow: hidden;
       width: 100%;
       max-width: 500px;
-      animation: typing 12s steps(150, end), blink-caret 0.75s step-end infinite;
+      color: #6b2c2c;
     }
+    body.dark .letter-text { color: #ffe4e1; }
 
     .popup button {
       margin-top: 2rem;
@@ -275,17 +208,13 @@
       100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
     }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes bounceIn { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
     @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-    @keyframes fadeInScale { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
-    @keyframes typing { from { width: 0; } to { width: 100%; } }
-    @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #ff69b4; } }
   </style>
 </head>
 <body>
 
   <button class="toggle-theme" onclick="toggleTheme()">🌓 Toggle Theme</button>
-  <audio autoplay loop id="bg-music">
+  <audio autoplay loop>
     <source src="https://cdn.pixabay.com/download/audio/2023/03/06/audio_f2119a6a1c.mp3" type="audio/mpeg">
   </audio>
 
@@ -301,27 +230,22 @@
   <div class="slider" id="slider">
     <h1>Happy Birthday Maya 🎉</h1>
     <p class="quote">"You make the world brighter just by being in it."</p>
+
     <div class="section active">🎂 On this special day, the universe pauses to celebrate you. Your existence adds meaning to mine.</div>
     <div class="section">🌌 You're not just beautiful on the outside, but breathtaking within. Today, we celebrate all that you are. 💖</div>
     <div class="section">🌠 My world began spinning in color the day you walked into it. You are my life. 🥺</div>
     <div class="section">🎶 Your laughter is the rhythm I live for. I'd write your name on every heartbeat. ❤️</div>
     <div class="section">🦋 You are grace wrapped in stardust. I fall for you every single day. 🌷</div>
     <div class="section">
-      <div>
-        With all my heart and soul, forever yours,<br><strong>sparsh</strong> 💌
-      </div>
-      <div style="margin-top: 3rem;">
+      With all my heart and soul, forever yours,<br><strong>sparsh</strong> 💌
+      <div style="margin-top: 2rem;">
         <button class="reveal-btn" onclick="showPopup(); firework()">💌 Reveal Love Letter 💌</button>
       </div>
     </div>
+
     <button class="next-btn" style="left: 1rem;" onclick="prevSlide()">⬅️ Prev</button>
     <button class="next-btn" style="right: 1rem;" onclick="nextSlide()">Next ➡️</button>
     <div class="footer">© 2025 Made with ❤️ by Sparsh</div>
-  </div>
-
-  <div class="envelope-container envelope" id="envelope" onclick="openEnvelope()">
-    <div class="envelope-flap"></div>
-    <div class="envelope-text">💌 Tap to Open</div>
   </div>
 
   <div class="popup" id="popup">
@@ -332,20 +256,17 @@
   <canvas id="confettiCanvas"></canvas>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
-    const lockScreen = document.getElementById('lockScreen');
-    const slider = document.getElementById('slider');
-    const errorMsg = document.getElementById('errorMsg');
     const sections = document.querySelectorAll('.section');
     let current = 0;
 
     function checkCode() {
       const code = document.getElementById('codeInput').value.trim();
       if (code === "143") {
-        lockScreen.classList.remove("active");
-        slider.classList.add("active");
-        errorMsg.style.display = "none";
+        document.getElementById("lockScreen").classList.remove("active");
+        document.getElementById("slider").classList.add("active");
+        document.getElementById("errorMsg").style.display = "none";
       } else {
-        errorMsg.style.display = "block";
+        document.getElementById("errorMsg").style.display = "block";
       }
     }
 
@@ -353,43 +274,36 @@
       sections.forEach((s, i) => s.classList.toggle('active', i === index));
     }
     function nextSlide() {
-      current = (current + 1) % sections.length;
+      if (current < sections.length - 1) current++;
       showSlide(current);
     }
     function prevSlide() {
-      current = (current - 1 + sections.length) % sections.length;
+      if (current > 0) current--;
       showSlide(current);
     }
 
     function showPopup() {
-      document.getElementById('envelope').style.display = 'block';
-    }
-
-    function openEnvelope() {
-      const envelope = document.getElementById('envelope');
-      envelope.classList.add('open');
-      setTimeout(() => {
-        envelope.style.display = 'none';
-        document.getElementById('popup').classList.add('show');
-        const text = `Dear Maya,
+      document.getElementById('popup').classList.add('show');
+      const text = `Dear Maya,
 
 Your love is the light in my world. Every second with you is magic.
 I promise to love you beyond limits. 💖
 
 Love,
 sparsh 💌`;
-        const target = document.getElementById('typedText');
-        target.innerText = '';
-        let i = 0;
-        function type() {
-          if (i < text.length) {
-            target.innerText += text.charAt(i);
-            i++;
-            setTimeout(type, 70);
-          }
+
+      const words = text.split(' ');
+      const target = document.getElementById('typedText');
+      target.innerText = '';
+      let i = 0;
+      function type() {
+        if (i < words.length) {
+          target.innerText += words[i] + ' ';
+          i++;
+          setTimeout(type, 350);
         }
-        setTimeout(type, 200);
-      }, 800);
+      }
+      setTimeout(type, 300);
     }
 
     function hidePopup() {
@@ -413,7 +327,7 @@ sparsh 💌`;
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 8000);
     }
-    setInterval(() => spawnEffect('heart', ['💗','❤️','💖'][Math.floor(Math.random()*3)]), 1000);
+    setInterval(() => spawnEffect('heart', '💗'), 1200);
     setInterval(() => spawnEffect('sparkle', '✨'), 1800);
     setInterval(() => spawnEffect('snowflake', '❄️'), 2200);
   </script>
