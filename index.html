@@ -127,7 +127,7 @@
 
     .letter-text {
       font-family: 'Gloria Hallelujah', cursive;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       line-height: 2rem;
       white-space: pre-wrap;
       overflow: hidden;
@@ -136,6 +136,20 @@
       color: #6b2c2c;
     }
     body.dark .letter-text { color: #ffe4e1; }
+
+    .signature {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      margin-top: 2rem;
+      color: #ff69b4;
+      opacity: 0;
+      animation: signatureWrite 2.5s ease-out forwards;
+    }
+
+    @keyframes signatureWrite {
+      0% { opacity: 0; transform: translateX(-50px) scale(0.8); }
+      100% { opacity: 1; transform: translateX(0) scale(1); }
+    }
 
     .popup button {
       margin-top: 2rem;
@@ -237,7 +251,7 @@
     <div class="section">🎶 Your laughter is the rhythm I live for. I'd write your name on every heartbeat. ❤️</div>
     <div class="section">🦋 You are grace wrapped in stardust. I fall for you every single day. 🌷</div>
     <div class="section">
-      With all my heart and soul, forever yours,<br><strong>sparsh</strong> 💌
+      With all my heart and soul, forever yours,<br><strong>sparsh</strong> 💌<br><br>
       <div style="margin-top: 2rem;">
         <button class="reveal-btn" onclick="showPopup(); firework()">💌 Reveal Love Letter 💌</button>
       </div>
@@ -250,6 +264,7 @@
 
   <div class="popup" id="popup">
     <div class="letter-text" id="typedText"></div>
+    <span id="signature" class="signature" style="display: none;">— sparsh 💌</span>
     <button onclick="hidePopup()">Close</button>
   </div>
 
@@ -284,26 +299,31 @@
 
     function showPopup() {
       document.getElementById('popup').classList.add('show');
+
       const text = `Dear Maya,
 
 Your love is the light in my world. Every second with you is magic.
-I promise to love you beyond limits. 💖
+I promise to love you beyond limits. 💖`;
 
-Love,
-sparsh 💌`;
-
-      const words = text.split(' ');
       const target = document.getElementById('typedText');
+      const signature = document.getElementById('signature');
       target.innerText = '';
+      signature.style.display = 'none';
+
       let i = 0;
       function type() {
-        if (i < words.length) {
-          target.innerText += words[i] + ' ';
+        if (i < text.length) {
+          target.innerText += text.charAt(i);
           i++;
-          setTimeout(type, 350);
+          setTimeout(type, 50);
+        } else {
+          setTimeout(() => {
+            signature.style.display = 'inline-block';
+          }, 300);
         }
       }
-      setTimeout(type, 300);
+
+      setTimeout(type, 200);
     }
 
     function hidePopup() {
